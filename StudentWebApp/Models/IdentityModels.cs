@@ -24,7 +24,17 @@ namespace StudentWebApp.Models
             : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
+        DbSet<student> studentObj { get; set; }
 
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            //Write Fluent API configurations here
+            modelBuilder.Entity<student>().ToTable("StudentDetails");
+            modelBuilder.Entity<student>().HasKey<int>(s => s.std_ID);
+           // modelBuilder.Entity<student>().
+        }
+
+        
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
